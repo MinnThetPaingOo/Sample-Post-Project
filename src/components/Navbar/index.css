@@ -1,0 +1,16 @@
+.navbar {
+    background-color: gray;
+    color:white;
+    padding: 10px;
+}
+
+
+
+.navbar .container ul{
+    display: flex;
+}
+
+.navbar .container li{
+    list-style-type: none;
+    margin: 0 20px;
+}

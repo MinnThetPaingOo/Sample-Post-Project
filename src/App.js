@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { useState } from 'react';
+import Navbar from './components/Navbar/index'
+import PostLists from './components/PostLists/index';
+import Form from './components/Form/index';
+import Modal from './components/Modal/index';
 
-function App() {
+export default function App() {
+let[showModal,setshowModal] = useState(false)
+let [posts,setPosts] = useState([
+  {
+    id : 1,
+    title: 'First Post',
+    status: 'upcoming'
+  },
+  {
+    id : 2,
+    title: 'Second Post',
+    status: 'dropped'
+  },
+]) 
+let addPost = (post) =>{
+  setPosts((prevState)=>[...prevState,post])
+  setshowModal(false)
+}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <Navbar setshowModal={setshowModal}/>
+    <PostLists posts={posts}/>
+    {/* <Modal>
+            <h1>Zoom class is available now</h1>
+            <p>Feel free to <a href="">join here</a></p>
+    </Modal> */}
+    {showModal &&
+      <Modal danger setshowModal={setshowModal}>
+        <Form addPost={addPost}/>
+      </Modal>
+    }
+    
+    </>
+  )
 }
 
-export default App;
